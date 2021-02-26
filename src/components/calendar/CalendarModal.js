@@ -7,9 +7,9 @@ import DateTimePicker from "react-datetime-picker";
 import Swal from "sweetalert2";
 import { uiCloseModal } from "../../actions/uiActions";
 import {
-  eventAddNew,
   eventResetActive,
-  eventUpdated,
+  eventStartAddNew,
+  eventStartUpdate,
 } from "../../actions/eventActions";
 
 const customStyles = {
@@ -104,19 +104,10 @@ export const CalendarModal = () => {
     //TODO: realizar grabación
     if (activeEvent) {
       // Actualizar un Evento
-      dispatch(eventUpdated(formValues));
+      dispatch(eventStartUpdate(formValues));
     } else {
       // Crear un evento
-      dispatch(
-        eventAddNew({
-          ...formValues,
-          id: new Date().getTime(),
-          user: {
-            _id: "123",
-            name: "Andrés",
-          },
-        })
-      );
+      dispatch(eventStartAddNew(formValues));
     }
     setTitleValid(true);
     closeModal();
